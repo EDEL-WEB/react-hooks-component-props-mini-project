@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom";
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import Article from "../components/Article";
 
@@ -61,4 +62,20 @@ test("renders a <p> with the preview text", () => {
   const p = screen.queryByText(/Setting up the building blocks of your site/);
   expect(p).toBeInTheDocument();
   expect(p.tagName).toBe("P");
+});
+
+test("renders an article with the correct content", () => {
+  render(
+    <Article
+      title="Article Title"
+      date="January 1, 1970"
+      preview="This is a preview"
+    />
+  );
+
+  // Check for the title
+  expect(screen.getByText("Article Title")).toBeInTheDocument();
+
+  // Check for the preview text
+  expect(screen.getByText("This is a preview")).toBeInTheDocument();
 });
